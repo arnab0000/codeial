@@ -7,7 +7,8 @@ const port = 8000
 //firing up express
 const app = express()
 
-
+//use express router
+app.use('/', require('./routes'));
 
 
 
