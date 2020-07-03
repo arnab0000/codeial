@@ -6,8 +6,12 @@ const homeController = require('../controllers/home_controller');
 
 router.get('/', homeController.home)
 
-console.log("Router Loaded")
+router.use('/user', require('./users'))
 
+//for any further routes, access from here
+//router.use('/routerName', require('./routerFile'));
+
+console.log("Router Loaded")
 
 
 module.exports = router

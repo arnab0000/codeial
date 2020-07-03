@@ -1,3 +1,5 @@
 module.exports.home = function(request, response){
-    return response.end('<h1>Controller for Codeial is UP</h1>');
+    return response.render('home', {title: "Home"});
 }
+
+//module.exports.actionName = function(request, response){}
