@@ -35,5 +35,22 @@ module.exports.create = function(request, response){
 
 //logging into a session
 module.exports.createSession = function(request, response){
-    //TODO
+    //steps to authenticate
+    //find the user
+    User.findOne({email: request.body.email}, function(err, user){
+        if(err){console.log('Error in finding user in signing up'); return;}
+        //if user not found
+        if(!user){
+            return response.redirect('back')
+        }else{
+            //if user found and password donot match
+            if(user.password != request.body.password){
+                return response.redirect('back')
+            }else{
+                //handling session creation
+                response.cookie('user_id', user.id)
+                return response.redirect('/user/profile');
+            }
+        }
+    })
 };

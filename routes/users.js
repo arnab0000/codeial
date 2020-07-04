@@ -18,5 +18,7 @@ router.get('/sign-in', usersController.signIn);
 
 router.post('/create', usersController.create);
 
+router.post('/create-session', usersController.createSession);
+
 //exporting the router
 module.exports = router;
