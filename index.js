@@ -7,12 +7,27 @@ const port = 8000
 //firing up express
 const app = express()
 
+//requiring cookie parser
+const cookieParser = require('cookie-parser');
+
+//connecting database with help of mongoose
+const db = require('./config/mongoose')
+
+//importing user schema
+const User = require('./models/user');
+
 //requiring layouts, these lines should be before routes
 const expressLayouts = require('express-ejs-layouts')
 
 //extract styles and script from sub pages into the layout
 app.set('layout extractStyles', true)
 app.set('layout extractScripts', true)
+
+//reading through post requests
+app.use(express.urlencoded());
+
+//set up cookie parser
+app.use(cookieParser());
 
 //linking css js and images, static files
 app.use(express.static('./assets'));
