@@ -1,7 +1,17 @@
 const User = require('../models/user')
 
 module.exports.profile = function(request, response){
-    return response.render('user_profile', {title: "User"})
+    if(request.cookies.user_id){
+        User.findById(request.cookies.user_id, function(err, user){
+            if(user){
+                return response.render('user_profile', {title: "User Profile", user: user})
+            }
+            return response.redirect('/user/sign-in')
+        })
+    }else{
+        return response.redirect('/user/sign-in')
+    }
+
 };
 
 //render the sign up page
@@ -49,7 +59,7 @@ module.exports.createSession = function(request, response){
             }else{
                 //handling session creation
                 response.cookie('user_id', user.id)
-                return response.redirect('/user/profile');
+                return response.redirect('/user/profile')
             }
         }
     })
