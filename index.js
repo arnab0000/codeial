@@ -1,5 +1,8 @@
 //requiring express
-const express = require('express')
+const express = require('express');
+
+//requiring cookie parser
+const cookieParser = require('cookie-parser');
 
 //defining port
 const port = 8000
@@ -7,8 +10,8 @@ const port = 8000
 //firing up express
 const app = express()
 
-//requiring cookie parser
-const cookieParser = require('cookie-parser');
+//requiring layouts, these lines should be before routes
+const expressLayouts = require('express-ejs-layouts')
 
 //connecting database with help of mongoose
 const db = require('./config/mongoose')
@@ -16,12 +19,17 @@ const db = require('./config/mongoose')
 //importing user schema
 const User = require('./models/user');
 
-//requiring layouts, these lines should be before routes
-const expressLayouts = require('express-ejs-layouts')
+//requiring sessions for cookie encryption/ session cookie
+const session = require('express-session');
+const passport = require('passport')
+const passportLocal = require('./config/passport-local-strategy');
+
 
 //extract styles and script from sub pages into the layout
 app.set('layout extractStyles', true)
 app.set('layout extractScripts', true)
+
+
 
 //reading through post requests
 app.use(express.urlencoded());
@@ -35,9 +43,6 @@ app.use(express.static('./assets'));
 //using layouts
 app.use(expressLayouts)
 
-//use express router
-app.use('/', require('./routes'));
-
 //defining view engine
 app.set('view engine', 'ejs');
 
@@ -47,13 +52,25 @@ app.set('view engine', 'ejs');
 //this can also be done in:
 app.set('views', './views');
 
+//middleware for cookie encryption
+app.use(session({
+    name: 'codeial',
+    // TODO change the secret before deployment in production mode
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 
 
-
-
-
-
-
+//use express router
+app.use('/', require('./routes'));
 
 
 

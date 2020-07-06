@@ -6,11 +6,17 @@ module.exports.profile = function(request, response){
 
 //render the sign up page
 module.exports.signUp = function(request, response){
+    if(request.isAuthenticated()){
+        return response.redirect('/user/profile');
+    }
     return response.render('user_sign_up', {title: "Sign Up Page"})
 };
 
 //render the sign In page
 module.exports.signIn = function(request, response){
+    if(request.isAuthenticated()){
+        return response.redirect('/user/profile')
+    }
     return response.render('user_sign_in', {title: "Sign In Page"})
 };
 
@@ -35,5 +41,5 @@ module.exports.create = function(request, response){
 
 //logging into a session
 module.exports.createSession = function(request, response){
-    //TODO
+    return response.redirect('/user/profile')
 };
