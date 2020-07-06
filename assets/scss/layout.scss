@@ -1,4 +1,39 @@
-body{
-    background-color: salmon;
-    text-align: center;
+#header{
+    height: 11vh;
+    background-color: #2d91d0;
+    color: wheat;
+    a{
+        text-decoration: none;
+        color: wheat;    
+    }
+    li{
+        list-style: none;
+        display: inline-block;
+    }
+    header{
+        display: flex;
+        align-content: space-between;
+        justify-content: space-between;
+    }
+}
+#body{
+    height: 100vh;
+}
+#footer{
+    background-color: #2d91d0;
+    height: 11vh;
+    color: wheat;
+    ul{
+        display: flex;
+        flex-direction: row-reverse;
+        li{
+            list-style: none;
+            display: inline-block;
+            a{
+                text-decoration: none;
+                color: wheat;
+            }
+        }
+    
+    }
 }
