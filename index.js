@@ -30,6 +30,16 @@ const MongoStore = require('connect-mongo')(session);
 app.set('layout extractStyles', true)
 app.set('layout extractScripts', true)
 
+//sass middleware 
+const sassMiddleware = require('node-sass-middleware');
+app.use(sassMiddleware({
+    src: '/assets/scss',
+    dest: '/assets/css',
+    debug: true,
+    outputStyle: 'expanded',
+    prefix: '/css'
+}));
+
 
 
 //reading through post requests
