@@ -23,6 +23,7 @@ const User = require('./models/user');
 const session = require('express-session');
 const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo')(session);
 
 
 //extract styles and script from sub pages into the layout
@@ -61,7 +62,16 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100)
-    }
+    },
+    store: new MongoStore(
+        {
+            mongooseConnection: db,
+            autoRemove: 'disabled'
+        },
+        function(err){
+            console.log(err || 'connect-mongodb setup ok')
+        }
+    )
 }));
 
 app.use(passport.initialize());
