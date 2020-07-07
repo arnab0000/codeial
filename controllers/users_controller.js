@@ -44,6 +44,7 @@ module.exports.createSession = function(request, response){
     return response.redirect('/user/profile')
 };
 
+//logging out of a session
 module.exports.destroySession = function(request, response){
     request.logout()
     return response.redirect('/')
