@@ -89,7 +89,7 @@ app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
 
-//use express router
+//routes
 app.use('/', require('./routes'));
 
 

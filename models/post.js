@@ -1,12 +1,12 @@
-const mongooge = require('mongoose');
+const mongoose = require('mongoose');
 
-const postSchema = new mongooge.Schema({
+const postSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
     },
     user: {
-        type: mongooge.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 },{

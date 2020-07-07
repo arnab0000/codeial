@@ -12,6 +12,7 @@
 #header li {
   list-style: none;
   display: inline-block;
+  margin-left: 2rem;
 }
 
 #header header {
@@ -38,6 +39,7 @@
 #footer ul li {
   list-style: none;
   display: inline-block;
+  margin-left: 2rem;
 }
 
 #footer ul li a {
