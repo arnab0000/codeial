@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema({
     comment: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'comment'
+            ref: 'Comment'
         }
     ]
 },{
@@ -22,4 +22,4 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
-module.exports = Post
+module.exports = Post;
