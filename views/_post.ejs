@@ -1,0 +1,20 @@
+<div id="post-list-cointainer">
+    <ul>
+        <% for(post of post) {%>
+            <p>
+                <li>
+                    <% if (locals.user && locals.user.id == post.user.id){%>
+                        <small>
+                            <a href="/post/destroy/<%= post.id%>">
+                                delete
+                            </a>
+                        </small>    
+                    <%}%>
+                    <small><%= post.user.name %></small><br>
+                    <%= post.content%>
+                </li>
+            </p>
+            <%-  include('_comment') -%>
+        <%}%>
+    </ul>
+</div>
