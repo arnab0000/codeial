@@ -1,13 +1,23 @@
 const User = require('../models/user')
 
 module.exports.profile = function(request, response){
-    User.findById(request.params.id, function(err, user){
-        return response.render('user_profile', {
+   User.findById(request.params.id, function(err, user){
+       return response.render('user_profile', {
             title: "User",
             profile_user: user
-        })
-    })
+      })
+   })
 };
+
+module.exports.update = function(request, response){
+    if(request.user.id == request.params.id){
+        User.findByIdAndUpdate(request.params.id, request.body, function(err, user){
+            return response.redirect('back')
+        })
+    }else{
+        return response.status(401).send('Unauthorised')
+    }
+}
 
 //render the sign up page
 module.exports.signUp = function(request, response){
@@ -46,8 +56,9 @@ module.exports.create = function(request, response){
 
 //logging into a session
 module.exports.createSession = function(request, response){
-    return response.redirect('/user/profile')
+    return response.redirect('/')
 };
+//this part was wrong only ok thank you... ok plz mark ir resolved ye s i will do that...
 
 //logging out of a session
 module.exports.destroySession = function(request, response){

@@ -1,12 +1,14 @@
 <header>
    <div>
-       <h2>Codeial</h2>
+        <a href="/">
+            <h2>Codeial</h2>
+        </a>
    </div>
    <div>
         <ul>
             <% if(locals.user){%>
                 <li>
-                    <a href="/user/profile"><%= user.name%></a>
+                    <a href="/user/profile/<%=user.id%>"><%= user.name%></a>
                 </li>
                 <li>
                     <a href="/user/sign-out">Sign Out</a>

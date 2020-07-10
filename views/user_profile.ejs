@@ -1,3 +1,13 @@
-<h1>User Profile</h1>
-<p><%= profile_user.name%></p>
-<p><%= profile_user.email%></p>
+<h1>Codeial | Profile</h1>
+<% if(user.id == profile_user.id) {%>
+    <!-- if user matches then show form -->
+    <form action="/user/update/<%= profile_user.id%>" method="POST">
+        <input type="text" name="name" value="<%= profile_user.name %>" required>
+        <input type="text" name="email" value="<%= profile_user.email%>" required>
+        <button type="submit">Update</button>
+    </form>
+<% }else{ %>
+    <!-- if it dosenot matches the we show the other user profile information -->
+    <p><%= profile_user.name %></p>
+    <p><%= profile_user.email %></p>
+<% } %>
