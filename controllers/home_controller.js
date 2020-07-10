@@ -1,4 +1,8 @@
 const Post = require('../models/post');
+
+//used for showing different user profiles
+const User = require('../models/user')
+
 // const { populate } = require('../models/post');
 
 module.exports.home = function(request, response){
@@ -14,13 +18,16 @@ module.exports.home = function(request, response){
         }
     })
     .exec(function(err, post){
-        if(err){
-            console.log("Error in populating", err)
-        }
-        return response.render('home', {
-            title: "Codeial | Home",
-            post: post
-        });
+        User.find({}, function(err, user){
+            if(err){
+                console.log("Error in populating", err)
+            }
+            return response.render('home', {
+                title: "Codeial | Home",
+                post: post,
+                all_user: user
+            });
+        })
     });
     // Post.find({}, function(err, post){
     //     console.log('post', post);
