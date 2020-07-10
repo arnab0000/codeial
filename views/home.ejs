@@ -1,24 +1,25 @@
-<h1>
-    Rendered from codeial home
-</h1>
-<section id="feed-post">
-    <% if(locals.user){ %>
-        <h4>What's on your mind</h4>
-        <form action="/post/create" id="new-post-form" method="POST">
-            <textarea name="content" id="" cols="30" rows="3" placeholder="Type Here...."></textarea>
-            <button type="submit">Post</button>
-        </form>
-    <%}%>
-    <%- include('_post') -%>
-</section>
+<link rel="stylesheet" href="/css/home.css">
 
-<section id="feed-post">
-    <h4>Friends</h4>
-    <% for(u of all_user){%>
-        <p>
-            <a href="/user/profile/<%= u.id %>">
-                <%= u.name%>
-            </a>
-        </p>
-    <% } %>
-</section>
+<div id="home-container">
+    <section id="feed-post">
+        <% if(locals.user){ %>
+            <h4>What's on your mind</h4>
+            <form action="/post/create" id="new-post-form" method="POST">
+                <textarea name="content" id="" cols="30" rows="3" placeholder="Type Here...."></textarea>
+                <button type="submit">Post</button>
+            </form>
+        <%}%>
+        <%- include('_post') -%>
+    </section>
+
+    <section id="user-friend">
+        <h4>Friends</h4>
+        <% for(u of all_user){%>
+            <p>
+                <a href="/user/profile/<%= u.id %>">
+                    <%= u.name%>
+                </a>
+            </p>
+        <% } %>
+    </section>
+</div>
