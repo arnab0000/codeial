@@ -10,9 +10,11 @@ module.exports.create = async function(request, response){
             content: request.body.content,
             user: request.user._id
         });
+        request.flash('success', 'Post Publshed!')
         return response.redirect('back');
     }catch(err){
-        console.log("Error", err);
+        request.flash('error', err)
+        return response.redirect('back')
     };
 };
 
@@ -23,12 +25,15 @@ module.exports.destroy = async function(request, response){
         if(post.user == request.user.id){
             post.remove()
             await Comment.deleteMany({post: request.params.id}) 
+            request.flash('success', 'Post Removed!')
             return response.redirect('back')
     
         }else{
+            request.flash('error', 'You cannot delete this post')
             return response.redirect('back')
         }
     }catch(err){
-        console.log('Error', err)
+        request.flash('error', err)
+        return request.redirect('back')
     }
 }
