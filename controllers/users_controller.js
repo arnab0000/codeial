@@ -56,6 +56,7 @@ module.exports.create = function(request, response){
 
 //logging into a session
 module.exports.createSession = function(request, response){
+    request.flash('success', 'Logged in successfully')
     return response.redirect('/')
 };
 //this part was wrong only ok thank you... ok plz mark ir resolved ye s i will do that...
@@ -63,5 +64,6 @@ module.exports.createSession = function(request, response){
 //logging out of a session
 module.exports.destroySession = function(request, response){
     request.logout()
+    request.flash('success', 'You are logged out')
     return response.redirect('/')
 }

@@ -25,6 +25,11 @@ const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo')(session);
 
+//requiring connect-flash
+const flash = require('connect-flash');
+
+//requiring middleware created for flash messages
+const cMware = require('./config/middleware')
 
 //extract styles and script from sub pages into the layout
 app.set('layout extractStyles', true)
@@ -84,9 +89,16 @@ app.use(session({
     )
 }));
 
+//using passoprt that is sutup for authentication
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+//using flash
+app.use(flash());
+
+//using middleware for showing flash messages
+app.use(cMware.setFlash);
 
 
 //routes
